@@ -1,3 +1,10 @@
+mod cli;
+
 fn main() {
-    println!("Hello, world!");
+    let matches = cli::root_command().get_matches();
+
+    match matches.subcommand() {
+        None => cli::root_handler(matches),
+        _ => unreachable!(),
+    }
 }
