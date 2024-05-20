@@ -1,0 +1,10 @@
+[package]
+name = "purgo"
+version = "0.1.0"
+edition = "2021"
+description = "Clean up your filesystem! It's like a spell, you cast purgo and it just works."
+authors = ["Kauê Fraga Rodrigues <rkauefraga+purgo@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/kauefraga/purgo"
+
+[dependencies]
