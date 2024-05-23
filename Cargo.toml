@@ -9,4 +9,7 @@ repository = "https://github.com/kauefraga/purgo"
 
 [dependencies]
 clap = { version = "4.5.4", features = ["cargo"] }
+colorized = "1.0.0"
 inquire = "0.7.5"
+size = "0.4.1"
+walkdir = "2.5.0"
