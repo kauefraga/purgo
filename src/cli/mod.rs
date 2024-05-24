@@ -9,11 +9,11 @@ use walkdir::WalkDir;
 pub fn root_command() -> Command {
     command!()
         .arg(arg!([directory] "Set the local to run"))
-        .arg(arg!(-d --depth <DEPTH> "Define how deep the search should be").default_value("5"))
+        .arg(arg!(-d --depth <DEPTH> "Define how deep the search should be").default_value("3"))
     // -i --interactive (bool), define flags via prompts
     // -f --follow-symlinks (bool), disabled by default
     // -y --yes (bool), show the files that will be deleted and ask yes/no just one time
-    // -w --weight define how big the detected files should be, > 50MB by default
+    // -s --size define the size of a considered big file, > 50MB by default
 }
 
 pub fn root_handler(matches: ArgMatches) {
@@ -29,7 +29,7 @@ pub fn root_handler(matches: ArgMatches) {
     }
 
     let depth = matches.get_one::<String>("depth").unwrap();
-    let depth = depth.parse().unwrap_or(5);
+    let depth = depth.parse().unwrap_or(3);
 
     let walker = WalkDir::new(directory)
         .max_depth(depth)
@@ -39,8 +39,8 @@ pub fn root_handler(matches: ArgMatches) {
     for entry in walker {
         let size = entry.metadata().unwrap().len();
 
-        // hard coded 5MB
-        if size < 5 * consts::MB as u64 {
+        // hard coded 50MB
+        if size < 50 * consts::MB as u64 {
             continue;
         }
 
